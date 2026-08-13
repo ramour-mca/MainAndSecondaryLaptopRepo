@@ -53,6 +53,7 @@ write-host $test -ForegroundColor Red
 
 if (!($Uninstall.IsPresent)) {
    
+      write-host "uninstall is present" -ForegroundColor Yellow
       Write-Log "(¯`·._.·(¯`·._.· $Global:Softwarename Installation Begin ·._.·´¯)·._.·´¯)"
 
       if (get-installedsoftware $Global:Softwarename) {
