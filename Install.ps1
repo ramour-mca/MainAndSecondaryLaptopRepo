@@ -49,7 +49,7 @@ Import-Module "$PSScriptRoot\SoftwareInstallation.psm1" -Force
 
 $test = get-installedsoftware $Global:Softwarename
 
-write-host $test -ForegroundColor Red
+write-host $test.SoftwareName -ForegroundColor Red
 
 if (!($Uninstall.IsPresent)) {
    
