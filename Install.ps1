@@ -52,6 +52,8 @@ if (!($Uninstall.IsPresent)) {
       Write-Log "(¯`·._.·(¯`·._.· $Global:Softwarename Installation Begin ·._.·´¯)·._.·´¯)"
 
       if (get-installedsoftware $Global:Softwarename) {
+
+         Write-Host "stepping in function " -ForegroundColor Red
          
             Uninstall-Software $Global:Softwarename -UninstallSwitches $UninstallationSwitches
       }
