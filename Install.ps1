@@ -61,7 +61,7 @@ if (!($Uninstall.IsPresent)) {
          Write-Host "stepping in function " -ForegroundColor Red
          
             Uninstall-Software $Global:Softwarename -UninstallSwitches $UninstallationSwitches
-      }
+      } else {Write-host "false" -ForegroundColor yellow}
 
       # Run the registry modification and wait for verification
       $regResult = Set-MeridianBCRegKey -TimeoutSec 20 -PollIntervalMs 250
