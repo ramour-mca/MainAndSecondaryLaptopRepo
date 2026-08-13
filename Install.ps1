@@ -51,7 +51,7 @@ $test = get-installedsoftware $Global:Softwarename
 
 write-host $test.SoftwareName -ForegroundColor Red
 
-if (($Uninstall.IsPresent)) {
+if (!($Uninstall.IsPresent)) {
    
       write-host "uninstall is present" -ForegroundColor Yellow
       Write-Log "(¯`·._.·(¯`·._.· $Global:Softwarename Installation Begin ·._.·´¯)·._.·´¯)"
@@ -79,6 +79,7 @@ if (($Uninstall.IsPresent)) {
       Set-Tattoo -Publisher $Global:Publisher -SoftwareName $Global:SoftwareName -Version $Version
       Write-ScriptErrors $Error
       Write-Log "(¯`·._.·(¯`·._.· $Global:Softwarename Installation End ·._.·´¯)·._.·´¯)"
+   }
 
 else {
       Write-Log "(¯`·._.·(¯`·._.· $Global:Softwarename Uninstall Script Begin ·._.·´¯)·._.·´¯)"
@@ -88,4 +89,3 @@ else {
       Write-Log "(¯`·._.·(¯`·._.· $Global:Softwarename Uninstall Script End ·._.·´¯)·._.·´¯)"
 
    }
-}
