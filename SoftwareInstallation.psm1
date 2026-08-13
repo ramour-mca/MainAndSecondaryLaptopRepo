@@ -331,7 +331,6 @@ Function Uninstall-Software {
 
             Write-Host $Software "the software has been found" -ForegroundColor Red
 
-            break
         
         Foreach ($Product in $Software) {
             
