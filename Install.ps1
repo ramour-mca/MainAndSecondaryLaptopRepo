@@ -47,6 +47,10 @@ $UninstallationSwitches = "/quiet /norestart"
 
 Import-Module "$PSScriptRoot\SoftwareInstallation.psm1" -Force
 
+$test = get-installedsoftware $Global:Softwarename
+
+write-host $test -ForegroundColor Red
+
 if (!($Uninstall.IsPresent)) {
    
       Write-Log "(¯`·._.·(¯`·._.· $Global:Softwarename Installation Begin ·._.·´¯)·._.·´¯)"
