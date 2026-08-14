@@ -84,7 +84,7 @@ if (!($Uninstall.IsPresent)) {
      
       #*******************INSTALL KINECT************************************************************
 
-      Write-Log "(¯`·._.·(¯`·._.· $Global:Softwarename Installation Begin ·._.·´¯)·._.·´¯)" -foregroundcolor yellow
+      Write-Log "(¯`·._.·(¯`·._.· $Global:Softwarename Installation Begin ·._.·´¯)·._.·´¯)"  
       
       Install-Software $InstallKinect $KinnectInstallationSwitches
 
@@ -92,30 +92,37 @@ if (!($Uninstall.IsPresent)) {
       
       Set-Tattoo -Publisher $Global:Publisher -SoftwareName $SoftwareNameKinect -Version $KinectVersion
 
-      Write-Log "(¯`·._.·(¯`·._.· $SoftwareNameKinect Installation End ·._.·´¯)·._.·´¯)" -foregroundcolor Yellow
+      Write-Log "(¯`·._.·(¯`·._.· $SoftwareNameKinect Installation End ·._.·´¯)·._.·´¯)" 
 
      
       Write-ScriptErrors $Error
    }
 
+#**************This will uninstall the application when the -uninstall switch is present**********************
 else {
       
-      Write-Log "(¯`·._.·(¯`·._.· $Global:Softwarename And $SoftwareNameKinect Uninstall Script Begin ·._.·´¯)·._.·´¯)"
+      Write-Log "(¯`·._.·(¯`·._.· $Global:Softwarename Uninstall Script Begin ·._.·´¯)·._.·´¯)"
       
-      #**********************************************************************************************
-      #This line Uninstalls Meridian Enterprise (x84) with defined parameters
       Uninstall-Software $Global:Softwarename -UninstallSwitches $UninstallationSwitches
-      
-      #**********************************************************************************************
-      #Uninstalling KINECT by changing the Softwarename variable
-      Uninstall-Software $SoftwareNameKinect -UninstallationSwitches $UninstallationSwitches
-      #***********************************************************************************************
 
       Set-Tattoo -Publisher $Global:Publisher -SoftwareName $Global:SoftwareName -Clean
-      Set-Tattoo -Publisher $Global:Publisher -SoftwareName $SoftwareNameKinect  -Clean
+
+      Write-Log "(¯`·._.·(¯`·._.· $Global:Softwarename Uninstall Script End ·._.·´¯)·._.·´¯)"
+
+
+
+      Write-Log "(¯`·._.·(¯`·._.· $SoftwareNameKinect Uninstall Script Begin ·._.·´¯)·._.·´¯)"
+
+      Uninstall-Software $SoftwareNameKinect -UninstallationSwitches $UninstallationSwitches
+      
+      Set-Tattoo -Publisher $Global:Publisher -SoftwareName $Softwarename  -Clean
+
+      Write-Log "(¯`·._.·(¯`·._.· $Global:Softwarename Uninstall Script End ·._.·´¯)·._.·´¯)"      
+      
+      
 
       Write-ScriptErrors $Error
       
-      Write-Log "(¯`·._.·(¯`·._.· $Global:Softwarename Uninstall Script End ·._.·´¯)·._.·´¯)"
+      
 
    }
