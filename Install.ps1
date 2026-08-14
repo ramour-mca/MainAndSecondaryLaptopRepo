@@ -72,7 +72,7 @@ if (!($Uninstall.IsPresent)) {
 
       Install-Software $InstallMeridian  $MeridianInstallationSwitches
       
-      Write-Log "Tattooing registry Meridian Enterprise (x64)" -ForegroundColor Yellow
+      Write-Log "Tattooing registry Meridian Enterprise (x64)" 
       
       Set-Tattoo -Publisher $Global:Publisher -SoftwareName $Global:SoftwareName -Version $Version
       
@@ -85,7 +85,7 @@ if (!($Uninstall.IsPresent)) {
       
       Install-Software $InstallKinect $KinnectInstallationSwitches
 
-      Write-Log "Tattooing registry KINECT" -foregroundcolor Magenta
+      Write-Log "Tattooing registry KINECT"
       
       Set-Tattoo -Publisher $Global:Publisher -SoftwareName $SoftwareNameKinect -Version $KinectVersion
 
