@@ -328,9 +328,6 @@ Function Uninstall-Software {
                 
                 Else { $Software = Get-InstalledSoftware -SoftwareName $SoftwareName }
             }
-
-            Write-Host $Software "the software has been found" -ForegroundColor Red
-
         
         Foreach ($Product in $Software) {
             

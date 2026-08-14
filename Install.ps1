@@ -49,9 +49,6 @@ $UninstallationSwitches = "/quiet /norestart"
 
 Import-Module "$PSScriptRoot\SoftwareInstallation.psm1" -Force
 
-$test = get-installedsoftware $Global:Softwarename
-
-write-host $test.SoftwareName -ForegroundColor Red
 
 if (!($Uninstall.IsPresent)) {
    
@@ -115,7 +112,7 @@ else {
 
       Uninstall-Software $SoftwareNameKinect -UninstallationSwitches $UninstallationSwitches
       
-      Set-Tattoo -Publisher $Global:Publisher -SoftwareName $Softwarename  -Clean
+      Set-Tattoo -Publisher $Global:Publisher -SoftwareName $SoftwareNameKinect  -Clean
 
       Write-Log "(¯`·._.·(¯`·._.· $Global:Softwarename Uninstall Script End ·._.·´¯)·._.·´¯)"      
       
