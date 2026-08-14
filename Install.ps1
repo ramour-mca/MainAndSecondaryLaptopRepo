@@ -92,7 +92,7 @@ if (!($Uninstall.IsPresent)) {
 
 else {
       
-      Write-Log "(¯`·._.·(¯`·._.· $Global:Softwarename & $SoftwareNameKinect Uninstall Script Begin ·._.·´¯)·._.·´¯)"
+      Write-Log "(¯`·._.·(¯`·._.· $Global:Softwarename And $SoftwareNameKinect Uninstall Script Begin ·._.·´¯)·._.·´¯)"
       
       #**********************************************************************************************
       #This line Uninstalls Meridian Enterprise (x84) with defined parameters
