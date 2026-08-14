@@ -35,7 +35,7 @@ $Global:Publisher       = "Accruent"
 $Global:Softwarename    = "Meridian Enterprise (x64)"
 $MainVersion            = $Version
 
-$SoftwareNameKinect     + "KINECT CAD Integration"
+$SoftwareNameKinect     = "KINECT CAD Integration"
 [version]$KinectVersion = 27.7.7.1
 
 $InstallMeridian        = "$PSScriptRoot\Meridian(x64).msi"  #"`"$((Get-Item -Path $PSScriptRoot\* -Include *.msi).FullName)`""
