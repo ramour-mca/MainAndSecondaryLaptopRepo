@@ -110,7 +110,7 @@ else {
 
       Write-Log "(¯`·._.·(¯`·._.· $SoftwareNameKinect Uninstall Script Begin ·._.·´¯)·._.·´¯)"
 
-      Uninstall-Software $SoftwareNameKinect -UninstallationSwitches $UninstallationSwitches
+      Uninstall-Software $SoftwareNameKinect -UninstallSwitches $UninstallationSwitches
       
       Set-Tattoo -Publisher $Global:Publisher -SoftwareName $SoftwareNameKinect  -Clean
 
