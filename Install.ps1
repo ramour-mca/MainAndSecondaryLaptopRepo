@@ -34,15 +34,17 @@ $ErrorActionPreference  = "SilentlyContinue"
 $Global:Publisher       = "Accruent"
 $Global:Softwarename    = "Meridian Enterprise (x64)"
 $MainVersion            = $Version
-$Meridian               = "$PSScriptRoot\Meridian(x64).msi"  #"`"$((Get-Item -Path $PSScriptRoot\* -Include *.msi).FullName)`""
-$Kinect                 = "$PSScriptRoot\KINECT.msi"
 
-# *** UPDATED SWITCHES HERE ***
+$SoftwareNameKinect     + "KINECT CAD Integration"
+[version]$KinectVersion = 27.7.7.1
+
+$InstallMeridian        = "$PSScriptRoot\Meridian(x64).msi"  #"`"$((Get-Item -Path $PSScriptRoot\* -Include *.msi).FullName)`""
+$InstallKinect          = "$PSScriptRoot\KINECT.msi"
+
 $MeridianInstallationSwitches   = "/quiet ALLUSERS=1 REBOOT=ReallySuppress ADDLOCAL=Common,AMHook,Download,PublisherExt,Viewer,DBX,NETInterops,Acad2021,Acad2023,Acad2025,Acad2026,NETAPI,Revit,Inventor REMOVE=Acad2019,Acad2020,Acad2022,Acad2024 WEBACCESSURL=http://ibredm101/Meridian/Start SCURL=http://ibredm101/BCSiteCache"
 $KinnectInstallationSwitches    = "/quiet /norestart"
 
 $UninstallationSwitches = "/quiet /norestart"
-# ******************************
 
 
 Import-Module "$PSScriptRoot\SoftwareInstallation.psm1" -Force
@@ -54,15 +56,13 @@ write-host $test.SoftwareName -ForegroundColor Red
 if (!($Uninstall.IsPresent)) {
    
       write-host "uninstall is present" -ForegroundColor Yellow
-      Write-Log "(¯`·._.·(¯`·._.· $Global:Softwarename Installation Begin ·._.·´¯)·._.·´¯)"
+      Write-Log "(¯`·._.·(¯`·._.· $Global:Softwarename & $SoftwareNameKinect Installation Begin ·._.·´¯)·._.·´¯)"
 
       if (get-installedsoftware $Global:Softwarename) {
 
-         Write-Host "stepping in function " -ForegroundColor Red
-         
-            Uninstall-Software $Global:Softwarename -UninstallSwitches $UninstallationSwitches
-      } else {Write-host "false" -ForegroundColor yellow}
-
+        Uninstall-Software $Global:Softwarename -UninstallSwitches $UninstallationSwitches
+      } 
+      
       # Run the registry modification and wait for verification
       $regResult = Set-MeridianBCRegKey -TimeoutSec 20 -PollIntervalMs 250
 
@@ -72,20 +72,42 @@ if (!($Uninstall.IsPresent)) {
             throw "Installation aborted: Registry verification failed."
       }
 
-      Install-Software $Meridian $MeridianInstallationSwitches
-      Install-Software $Kinect $KinnectInstallationSwitches
+      Install-Software $InstallMeridian  $MeridianInstallationSwitches
+      Install-Software $InstallKinect    $KinnectInstallationSwitches
 
       Write-Log "Tattooing registry"
+      
       Set-Tattoo -Publisher $Global:Publisher -SoftwareName $Global:SoftwareName -Version $Version
-      Write-ScriptErrors $Error
+
       Write-Log "(¯`·._.·(¯`·._.· $Global:Softwarename Installation End ·._.·´¯)·._.·´¯)"
+
+      Set-Tattoo -Publisher $Global:Publisher -SoftwareName $SoftwareNameKinect -Version $KinectVersion
+
+      Write-Log "(¯`·._.·(¯`·._.· $SoftwareNameKinect Installation End ·._.·´¯)·._.·´¯)"
+
+      Write-ScriptErrors $Error
+      
+      
    }
 
 else {
-      Write-Log "(¯`·._.·(¯`·._.· $Global:Softwarename Uninstall Script Begin ·._.·´¯)·._.·´¯)"
+      
+      Write-Log "(¯`·._.·(¯`·._.· $Global:Softwarename & $SoftwareNameKinect Uninstall Script Begin ·._.·´¯)·._.·´¯)"
+      
+      #**********************************************************************************************
+      #This line Uninstalls Meridian Enterprise (x84) with defined parameters
       Uninstall-Software $Global:Softwarename -UninstallSwitches $UninstallationSwitches
+      
+      #**********************************************************************************************
+      #Uninstalling KINECT by changing the Softwarename variable
+      Uninstall-Software $SoftwareNameKinect -UninstallationSwitches $UninstallationSwitches
+      #***********************************************************************************************
+
       Set-Tattoo -Publisher $Global:Publisher -SoftwareName $Global:SoftwareName -Clean
+      Set-Tattoo -Publisher $Global:Publisher -SoftwareName $SoftwareNameKinect  -Clean
+
       Write-ScriptErrors $Error
+      
       Write-Log "(¯`·._.·(¯`·._.· $Global:Softwarename Uninstall Script End ·._.·´¯)·._.·´¯)"
 
    }
