@@ -55,8 +55,7 @@ write-host $test.SoftwareName -ForegroundColor Red
 
 if (!($Uninstall.IsPresent)) {
    
-      write-host "uninstall is present" -ForegroundColor Yellow
-      Write-Log "(¯`·._.·(¯`·._.· $Global:Softwarename And $SoftwareNameKinect Installation Begin ·._.·´¯)·._.·´¯)"
+      Write-Log "(¯`·._.·(¯`·._.· $Global:Softwarename Installation Begin ·._.·´¯)·._.·´¯)"
 
       if (get-installedsoftware $Global:Softwarename) {
 
@@ -72,22 +71,31 @@ if (!($Uninstall.IsPresent)) {
             throw "Installation aborted: Registry verification failed."
       }
 
-      Install-Software $InstallMeridian  $MeridianInstallationSwitches
-      Install-Software $InstallKinect    $KinnectInstallationSwitches
+      #*******************INSTALL MERIDIAN********************************************************
 
-      Write-Log "Tattooing registry"
+      Install-Software $InstallMeridian  $MeridianInstallationSwitches
+      
+      Write-Log "Tattooing registry Meridian Enterprise (x64)" -ForegroundColor Yellow
       
       Set-Tattoo -Publisher $Global:Publisher -SoftwareName $Global:SoftwareName -Version $Version
+      
+      Write-Log "(¯`·._.·(¯`·._.· $Global:Softwarename Installation End ·._.·´¯)·._.·´¯)" 
 
-      Write-Log "(¯`·._.·(¯`·._.· $Global:Softwarename Installation End ·._.·´¯)·._.·´¯)"
+     
+      #*******************INSTALL KINECT************************************************************
 
+      Write-Log "(¯`·._.·(¯`·._.· $Global:Softwarename Installation Begin ·._.·´¯)·._.·´¯)" -foregroundcolor yellow
+      
+      Install-Software $InstallKinect $KinnectInstallationSwitches
+
+      Write-Log "Tattooing registry KINECT" -foregroundcolor Magenta
+      
       Set-Tattoo -Publisher $Global:Publisher -SoftwareName $SoftwareNameKinect -Version $KinectVersion
 
-      Write-Log "(¯`·._.·(¯`·._.· $SoftwareNameKinect Installation End ·._.·´¯)·._.·´¯)"
+      Write-Log "(¯`·._.·(¯`·._.· $SoftwareNameKinect Installation End ·._.·´¯)·._.·´¯)" -foregroundcolor Yellow
 
+     
       Write-ScriptErrors $Error
-      
-      
    }
 
 else {
