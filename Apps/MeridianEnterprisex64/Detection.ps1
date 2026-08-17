@@ -42,7 +42,6 @@ Foreach ($SoftwareInstall in $SoftwareInstalls) {
         $SoftwareIsInstalled = $true
     }
 }
-__VSCode-Escape-Value
 # Check Compliancy
 If ($SoftwareIsInstalled -eq $true) {
 
