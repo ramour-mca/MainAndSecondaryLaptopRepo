@@ -24,7 +24,7 @@ Elseif ($InstallType -eq 1) {
 }
 
 # Filter Results
-$SoftwareInstalls = $AllInstalledSoftware | Where-Object DisplayName -Match $SoftwareName
+$SoftwareInstalls = $AllInstalledSoftware | Where-Object DisplayName -Like $SoftwareName
 
 # Validate Version is Greater Than or Equal To Required Version
 Foreach ($SoftwareInstall in $SoftwareInstalls) {
