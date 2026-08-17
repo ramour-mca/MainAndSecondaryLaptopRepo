@@ -46,4 +46,4 @@ Foreach ($SoftwareInstall in $SoftwareInstalls) {
 If ($SoftwareIsInstalled -eq $true) {
 
     Write-Output "Compliant"
-}
+}else {Write-Output "not installed"}
